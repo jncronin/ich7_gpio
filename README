@@ -1,0 +1,49 @@
+Intel ICH7 gpio module for linux
+--------------------------------
+
+This allows access to the GPIO pins on the ICH7
+
+
+Build Instructions
+------------------
+
+from within the source directory, run:
+make modules
+make modules_install
+
+
+Usage Instructions
+------------------
+
+modprobe ich7_gpio
+
+This creates a file within /proc called ich7_gpio
+
+To see the current state of the gpio registers read this file
+
+You can control the gpio registers by writing to the file:
+
+echo 'cmd args' > /proc/ich7_gpio
+
+
+Commands
+--------
+
+echo 'set reg value' > /proc/ich7_gpio
+
+set the value of the register 'reg' to the value 'value'.  See the output of
+cat /proc/ich7_gpio to see valid register names.  'value' is a decimal value.
+
+
+echo 'setbit reg bitno value' > /proc/ich7_gpio
+
+set a particular bit within the register 'reg' to either 1 or 0.
+
+
+LED commands
+------------
+
+The module interfaces with the linux LED interface to allow you to create LEDs
+based on the pins.  See the scripts directory for examples for this.  Currently
+examples for the Thecus N5500 and N7700 NASs are provided.
+
